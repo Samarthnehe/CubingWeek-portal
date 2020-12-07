@@ -75,7 +75,7 @@
         arr2.push(p2s1,p2s2,p2s3,p2s4,p2s5);
         for(i=0;i<arr2.length;i++){
           if(arr2[i]=="DNF"){
-            arr2[i]=ParseFloat(100000.00);
+            arr2[i]=parseFloat(100000.00);
             count2++;
           }
         }
@@ -87,28 +87,34 @@
         var avg1= (parseFloat(arr1[1])+parseFloat(arr1[2])+parseFloat(arr1[3]))/3;
         
         var avg2= (parseFloat(arr2[1])+parseFloat(arr2[2])+parseFloat(arr2[3]))/3;
-        if(count1>1 || count2>1){
+        
           if(count1>1){
             document.getElementById("player1").innerHTML="DNF";
         }
-        if(count2>1){
-          document.getElementById("player2").innerHTML="DNF";
-        }
-        }
         else{
+            
           if(p1s1!='' && p1s2!='' && p1s3!='' && p1s4!='' && p1s5!='' ){
             document.getElementById("player1").innerHTML=avg1.toFixed(2);
         }
         else{
           document.getElementById("player1").innerHTML="-";
         }
-        if(p2s1!='' && p2s2!='' && p2s3!='' && p2s4!='' && p2s5!='' ){
-          document.getElementById("player2").innerHTML=avg2.toFixed(2);
+        }
+        if(count2>1){
+          document.getElementById("player2").innerHTML="DNF";
         }
         else{
-          document.getElementById("player2").innerHTML="-";
+            if(p2s1!='' && p2s2!='' && p2s3!='' && p2s4!='' && p2s5!='' ){
+                document.getElementById("player2").innerHTML=avg2.toFixed(2);
+              }
+              else{
+                document.getElementById("player2").innerHTML="-";
+              }
         }
-        }
+        
+        
+       
+        
         var data = {
             getUserDataFromSession: function() {
                 var userData = window.sessionStorage.getItem('userObject');
@@ -127,14 +133,16 @@
                   userDataObject[i].Played++;
                   userDataObject[i].Won++;
                   userDataObject[i].points+=2;
-                  if(avg2.toFixed(2)<userDataObject[i].Bestavg){
+                  if(parseFloat(avg2.toFixed(2))<parseFloat(userDataObject[i].Bestavg)){
+                      console.log("heya");
                     userDataObject[i].Bestavg=avg2.toFixed(2);
                   }
               }
               if(userDataObject[i].name==document.getElementById("p1").innerHTML){
                   userDataObject[i].Played++;
                   userDataObject[i].Lost++;
-                  if(avg1.toFixed(2)<userDataObject[i].Bestavg){
+                  if(parseFloat(avg1.toFixed(2))<parseFloat(userDataObject[i].Bestavg)){
+                    console.log("heya");
                     userDataObject[i].Bestavg=avg1.toFixed(2);
                   }
               }
@@ -149,14 +157,18 @@
                   userDataObject[i].Played++;
                   userDataObject[i].Won++;
                   userDataObject[i].points+=2;
+             
                   if(parseFloat(avg1.toFixed(2))<parseFloat(userDataObject[i].Bestavg)){
+                      
                     userDataObject[i].Bestavg=avg1.toFixed(2);
                   }
               }
               if(userDataObject[i].name==document.getElementById("p2").innerHTML){
                   userDataObject[i].Played++;
                   userDataObject[i].Lost++;
+                  
                   if(parseFloat(avg2.toFixed(2))<parseFloat(userDataObject[i].Bestavg)){
+                  
                     userDataObject[i].Bestavg=avg2.toFixed(2);
                   }
                   

@@ -14,7 +14,7 @@
      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
      <link rel="icon" href="{{ url_for('static', filename='cubetitle.png') }}" sizes="96x96" type="image/png">
      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-     <title>Cubing Week - DAY2</title>
+     <title>Cubing Week - DAY3</title>
    
     
     
@@ -46,7 +46,7 @@
         <div style="display: flex;flex-direction: column;justify-content: center;align-items: center; background-color: rgb(19, 19, 19);border-radius: 10px;padding: 1em 0;box-shadow: inset 2px 2px 3px 2px rgba(0,0,0,0.6);">
           <div style="margin: 2em auto;">
             <h2><b>SCORECARD</b></h2>
-            <h4 style="color: yellow;">Perplexed Pyraminx</h4>
+            <h4 style="color: yellow;">Fantastic 4x4</h4>
           </div>
           <div style="border: 4px solid black;box-shadow: inset 2px 2px 3px 2px rgba(0,0,0,0.6)">
             <div style="background-color: black;height: 100%;">
@@ -183,7 +183,13 @@
             table+='<td style="border: 1px solid black;" id="p1s3">'+userDataObject[i].Lost+'</td>';
             table+='<td style="border: 1px solid black;" id="p1s3">'+userDataObject[i].points+'</td>';
             if(userDataObject[i].Bestavg!=100000){
-              table+='<td style="border: 1px solid black;" id="p1s3">'+userDataObject[i].Bestavg+'</td>';
+              if(userDataObject[i].Bestavg>60){
+                 table+='<td style="border: 1px solid black;" id="p1s3">'+Math.floor(parseFloat(userDataObject[i].Bestavg) / 60)+':'+(parseFloat(userDataObject[i].Bestavg) % 60).toFixed(2)+'</td>';
+              }
+              else{
+                 table+='<td style="border: 1px solid black;" id="p1s3">'+userDataObject[i].Bestavg+'</td>';
+              }
+             
             }
             else{
               table+='<td style="border: 1px solid black;" id="p1s3"> - </td>';
@@ -195,7 +201,7 @@
         document.getElementById("putter1").innerHTML=table;
         var first=document.getElementById("putter1").getElementsByTagName("tr");
         first[0].style.backgroundColor="rgb(1, 80, 1)";
-        first[1].style.backgroundColor="rgb(1, 80, 1)";
+        
         
         }
        
